@@ -13,9 +13,14 @@
 3. 可以自动探测子模块的依赖关系，最后输出的结果细分到模块
 4. 可以使用正则表达式过滤出需要排序的maven节点
 
-## 2. 用法
+## 2. 环境要求
 
-### 2.1 自定义ModuleParentNameResolver
+1. JRE 8+
+2. 系统安装了git命令以及xargs命令
+
+## 3. 用法
+
+### 3.1 自定义ModuleParentNameResolver
 
 有时候maven打包的粒度是module，那么在依赖分析的过程中，maven节点不能直接匹配到一个GitLab的仓库，这时候需要使用module的名字去找到所在的GitLab仓库。
 
@@ -24,16 +29,20 @@
 实现`pub.gordon.dg.maven.ModuleParentNameResolver`接口，然后将实现类的路径覆盖到
 `resource/META-INF/service/pub.gordon.dg.maven.ModuleParentNameResolver`文件中即可。
 
-### 2.2 参数 or 配置文件
+### 3.2 参数 or 配置文件
 
 参见`resource/usage.txt`
 
-### 2.3 打包
+### 3.3 打包
 
 ```bash
 mvn assembly:assembly -Dmaven.test.skip=true
 ```
 
-### 2.4 运行
+### 3.4 运行
 
 参见`resource/usage.txt`
+
+## LICENSE
+
+[MIT](LICENSE)

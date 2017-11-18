@@ -1,6 +1,6 @@
 用法：
 
-java -jar dependency.jar [参数]
+java -jar maven-topology-1.0-SNAPSHOT.jar [参数]...[参数]
 
 参数解释：
 
@@ -51,7 +51,7 @@ java -jar dependency.jar [参数]
 
 示例：
 
-java -jar maven-topology-1.0-SNAPSHOT.jar -Drepo.dir=~/Documents/repo -Dgitlab.url=http://gitlab.gordon.local -Dgitlab.username=tom -Dgitlab.password=123123 -Di=sample.txt -Do=out.txt -Dsuffix=dev -Drule.tag.pattern=dev$ -Drule.groupId.pattern=^pub.gordon
+java -jar maven-topology-1.0-SNAPSHOT.jar -Drepo.dir=~/Documents/repo -Dgitlab.url=http://gitlab.gordon.local -Dgitlab.username=tom -Dgitlab.password=123123 -Di=sample.txt -Do=out.txt -Drule.tag.pattern=dev$ -Drule.groupId.pattern=^pub.gordon
 
 
 If you see chaos characters, try adding -Dfile.encoding=UTF-8 when invoking.
