@@ -1,0 +1,8 @@
+/target/
+/disconf/
+/log/
+.classpath
+.project
+.settings/
+*.iml
+/.idea/

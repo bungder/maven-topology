@@ -1,0 +1,59 @@
+用法：
+
+java -jar dependency.jar [参数]
+
+参数解释：
+
+-Dh
+    查看使用帮助
+
+-Drepo.dir
+    指定代码的本地存放目录
+-Dgitlab.url
+    指定GitLab的地址，例如 http://gitlab.gordon.local
+-Dgitlab.username
+    指定GitLab的登录用户
+-Dgitlab.password
+    指定GitLab登录用户的登录密码
+
+-Dc
+    指定配置文件的路径，如果使用了此参数，则上面的参数都无效，如果不指定此参数，则上面四个参数都必须指定值，配置文件的格式如下：
+    {
+      "dir": "/Users/tanshichang/Documents/repo/test/gordon",
+      "rule": {
+        "tagPattern": "dev$",
+        "groupIdPattern": "^pub.gordon",
+        "artifactIdPattern": "",
+        "order": "DESC"
+      },
+      "gitlab": {
+        "url": "http://gitlab.gordon.local",
+        "username": "gordon",
+        "password": "123123123"
+      }
+    }
+
+-Di
+    指定输入文件，文件为文本文件，每行指定一个工程名
+-Do
+    指定输出文件
+-Drule.tag.pattern
+    指定要匹配的tag的正则表达式
+-Drule.tag.order
+    指定tag的排序规则，取值范围为『desc』和『asc』，可为空，缺省值为desc
+-Drule.groupId.pattern
+    指定要匹配的groupId的正则表达式，-Drule.groupId.pattern与-Drule.artifactId.pattern必须至少一个不为空
+-Drule.artifactId.pattern
+    指定要匹配的artifactId的正则表达式，-Drule.groupId.pattern与-Drule.artifactId.pattern必须至少一个不为空
+
+
+
+
+示例：
+
+java -jar maven-topology-1.0-SNAPSHOT.jar -Drepo.dir=~/Documents/repo -Dgitlab.url=http://gitlab.gordon.local -Dgitlab.username=tom -Dgitlab.password=123123 -Di=sample.txt -Do=out.txt -Dsuffix=dev -Drule.tag.pattern=dev$ -Drule.groupId.pattern=^pub.gordon
+
+
+If you see chaos characters, try adding -Dfile.encoding=UTF-8 when invoking.
+
+-
