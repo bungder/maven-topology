@@ -31,7 +31,7 @@
 
 ### 3.2 参数 or 配置文件
 
-参见[main/resource/usage.txt](main/resource/usage.txt)
+参见[src/main/resource/usage.txt](src/main/resource/usage.txt)
 
 ### 3.3 打包
 
@@ -41,7 +41,7 @@ mvn assembly:assembly -Dmaven.test.skip=true
 
 ### 3.4 运行
 
-参见[main/resource/usage.txt](main/resource/usage.txt)
+参见[src/main/resource/usage.txt](src/main/resource/usage.txt)
 
 ## LICENSE
 
