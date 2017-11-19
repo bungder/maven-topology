@@ -31,7 +31,7 @@
 
 ### 3.2 参数 or 配置文件
 
-参见[src/main/resources/usage.txt](src/main/resourcaes/usage.txt)
+参见[src/main/resources/usage.txt](src/main/resources/usage.txt)
 
 ### 3.3 打包
 
