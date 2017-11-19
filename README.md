@@ -27,11 +27,11 @@
 这种规则因人而异，因此需要具体的使用者去定义。
 
 实现`pub.gordon.dg.maven.ModuleParentNameResolver`接口，然后将实现类的路径覆盖到
-`resource/META-INF/service/pub.gordon.dg.maven.ModuleParentNameResolver`文件中即可。
+`main/resource/META-INF/service/pub.gordon.dg.maven.ModuleParentNameResolver`文件中即可。
 
 ### 3.2 参数 or 配置文件
 
-参见`resource/usage.txt`
+参见[main/resource/usage.txt](main/resource/usage.txt)
 
 ### 3.3 打包
 
@@ -41,7 +41,7 @@ mvn assembly:assembly -Dmaven.test.skip=true
 
 ### 3.4 运行
 
-参见`resource/usage.txt`
+参见[main/resource/usage.txt](main/resource/usage.txt)
 
 ## LICENSE
 
