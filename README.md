@@ -27,7 +27,7 @@
 这种规则因人而异，因此需要具体的使用者去定义。
 
 实现`pub.gordon.dg.maven.ModuleParentNameResolver`接口，然后将实现类的路径覆盖到
-`main/resource/META-INF/service/pub.gordon.dg.maven.ModuleParentNameResolver`文件中即可。
+`src/main/resources/META-INF/service/pub.gordon.dg.maven.ModuleParentNameResolver`文件中即可。
 
 ### 3.2 参数 or 配置文件
 
