@@ -31,7 +31,6 @@ public class ResourceUtil {
     }
 
     public static String readResource(String path) throws IOException {
-//        URL url = ResourceUtil.class.getClassLoader().getResource(path);
         InputStream input = ResourceUtil.class.getClassLoader().getResourceAsStream(path);
         StringBuilder sb = new StringBuilder();
         int len;
