@@ -30,7 +30,7 @@ This rule varies from people to people. So you may need to define your rule when
 
 Implement interface `pub.gordon.dg.maven.ModuleParentNameResolver`, then use full classname of that implementation class to cover content of file `src/main/resources/META-INF/service/pub.gordon.dg.maven.ModuleParentNameResolver`.
 
-### 3.2 Parameters or Confiuration File
+### 3.2 Parameters or Configuration File
 
 See [src/main/resources/usage.txt](src/main/resources/usage.txt)
 
