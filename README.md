@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/bungder/maven-topology.svg?branch=master)](https://travis-ci.org/bungder/maven-topology)
+[![codecov](https://codecov.io/gh/bungder/maven-topology/branch/master/graph/badge.svg)](https://codecov.io/gh/bungder/maven-topology)
 # Maven 节点的拓扑排序工具
 
 ## 1. 简介
