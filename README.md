@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/bungder/maven-topology.svg?branch=master)](https://travis-ci.org/bungder/maven-topology)
 # Maven 节点的拓扑排序工具
 
 ## 1. 简介
