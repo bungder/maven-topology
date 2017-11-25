@@ -7,11 +7,14 @@ before_install:
    - "echo Preparing package"  
    - mvn clean package -Dmaven.test.skip=true -Dmaven.javadoc.skip=true  
 install:  
-  - "echo skipped"
-script:  
-#  - "echo skipped"   
+#  - "echo skipped"
   - mvn install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true  
+#script:  
+#  - "echo skipped"   
+script: "mvn cobertura:cobertura"
 # - mvn deploy  
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 notifications:  
   email:  
     recipients:  
