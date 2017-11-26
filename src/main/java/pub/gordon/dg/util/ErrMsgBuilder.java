@@ -3,26 +3,23 @@ package pub.gordon.dg.util;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 错误消息构造器<br><br>
+ * Builder for Error Message <br><br>
  * <p>
- * 使用此构造器可以将多次错误消息汇总到一起然后一次性返回
+ * Using this builder could help you combine several error messages into one and get them at single call.
  *
  * @author Gordon
  * @version 2017-10-20 14:21
  */
 public class ErrMsgBuilder {
 
-    private boolean errorOccur = false;
-
-    private StringBuilder msgBuilder = new StringBuilder();
-
     /**
-     * 缺省的错误消息分隔符
+     * Default separator for error message
      */
     public static final String DEFAULT_SEPARATOR = ",";
-
+    private boolean errorOccur = false;
+    private StringBuilder msgBuilder = new StringBuilder();
     /**
-     * 错误消息分隔符
+     * Separator for error message
      */
     private String separator;
 
@@ -31,35 +28,35 @@ public class ErrMsgBuilder {
     }
 
     /**
-     * @param separator 缺省的错误消息分隔符
+     * @param separator Default separator for error message
      */
     public ErrMsgBuilder(String separator) {
         this.separator = separator;
     }
 
     /**
-     * 是否有错误出现
+     * To see if there is any error occurs.
      *
-     * @return true: 有错误发生；false: 没有错误发生
+     * @return true: Error occurs; false: No error
      */
     public boolean isErrorOccur() {
         return errorOccur;
     }
 
     /**
-     * 获取汇总的错误消息
+     * Get the combined error message.
      *
-     * @return 汇总的错误消息字符串
+     * @return String that represents the combined error message
      */
     public String getErrMsg() {
         return msgBuilder.toString();
     }
 
     /**
-     * 获取汇总的错误消息，如果消息文本以指定的{@code separator}结尾，则去掉尾部该部分
+     * Get the combined error message. If message text ends with the specific {@code separator}, that part would be removed.
      *
-     * @param separator 要去掉的尾部分隔符
-     * @return 汇总的错误消息字符串
+     * @param separator The tail should be removed
+     * @return String that represents the combined error message
      */
     public String getErrMsgWithoutSeparatorTail(String separator) {
         if (StringUtils.isBlank(separator)) {
@@ -76,9 +73,10 @@ public class ErrMsgBuilder {
     }
 
     /**
-     * 获取汇总的错误消息，去掉尾部分隔符。默认使用构造器指定的{@code separator}进行判断，如果改值为空，则使用{@code DEFAULT_SEPARATOR}判断
+     * Get the combined error message. If message text ends with the specific {@code separator}, that part would be removed.
+     * By default, using the {@link #separator} that was specified by constructor. If it is empty, using {@link #DEFAULT_SEPARATOR}
      *
-     * @return 汇总的错误消息字符串
+     * @return String that represents the combined error message
      */
     public String getErrMsgWithoutSeparatorTail() {
         String s = separator;
@@ -89,10 +87,10 @@ public class ErrMsgBuilder {
     }
 
     /**
-     * 追加一个错误消息构造器，使用{@link #DEFAULT_SEPARATOR}作为分隔符
+     * Append an Error Message Builder, using {@link #DEFAULT_SEPARATOR} as separator
      *
-     * @param builder 错误消息构造器
-     * @return 构造器自身
+     * @param builder ErrMsgBuilder instance
+     * @return builder itself "as-is"
      */
     public ErrMsgBuilder append(ErrMsgBuilder builder) {
         if (builder.errorOccur) {
@@ -104,6 +102,13 @@ public class ErrMsgBuilder {
         return this;
     }
 
+    /**
+     * Append an Error Message Building, using {@code separator} as separator
+     *
+     * @param builder   ErrMsgBuilder instance
+     * @param separator Specified separator
+     * @return builder itself "as-is"
+     */
     public ErrMsgBuilder append(ErrMsgBuilder builder, String separator) {
         append(builder);
         if (separator != null) {
@@ -113,11 +118,11 @@ public class ErrMsgBuilder {
     }
 
     /**
-     * 使用指定的分隔符追加一条错误消息
+     * Append an error message, using specified separator.
      *
-     * @param errMsg    指定的错误消息分隔符，如果为空，则使用{@link #DEFAULT_SEPARATOR}
-     * @param separator
-     * @return 构造器自身
+     * @param errMsg    Message to be appended
+     * @param separator Specified separator, if empty, using {@link #DEFAULT_SEPARATOR}
+     * @return builder itself "as-is"
      */
     public ErrMsgBuilder append(String errMsg, String separator) {
         if (separator == null) {
@@ -134,15 +139,15 @@ public class ErrMsgBuilder {
     }
 
     /**
-     * 追加一条错误消息<br><br>
+     * Append an error message<br><br>
      * <p>
-     * 如果指定了缺省分隔符，则使用缺省分隔符分割，否则使用{@link #DEFAULT_SEPARATOR}
+     * If default separator was specified, using it, or using {@link #DEFAULT_SEPARATOR}
      *
-     * @param errMsg 错误信息
-     * @return 构造器自身
+     * @param errMsg Message to be appended
+     * @return builder itself "as-is"
      */
     public ErrMsgBuilder append(String errMsg) {
-        if(separator != null){
+        if (separator != null) {
             return append(errMsg, separator);
         }
         return append(errMsg, DEFAULT_SEPARATOR);
