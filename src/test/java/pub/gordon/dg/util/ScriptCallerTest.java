@@ -38,11 +38,12 @@ public class ScriptCallerTest {
     }
 
     /**
+     * {@link ScriptCaller#exeCommand(String, String)}
      * Method: exeCommand(String workDir, String command)
      */
     @Test
     public void testExeCommand() throws Exception {
-        //TODO: Test goes here...
+        ScriptCaller.exeCommand("/", "ls -lah");
     }
 
     /**

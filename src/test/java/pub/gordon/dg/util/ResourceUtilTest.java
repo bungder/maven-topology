@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -11,6 +12,9 @@ import java.io.IOException;
  * @date 2017-11-17 17:37
  */
 public class ResourceUtilTest {
+
+    String content = "123123123123";
+    String path = "~/test.txt";
 
     @Test
     public void test() {
@@ -25,10 +29,16 @@ public class ResourceUtilTest {
 
     @Before
     public void before() throws Exception {
+        System.out.println("write");
+        ResourceUtil.write(content, path, true);
     }
 
     @After
     public void after() throws Exception {
+        File file = ResourceUtil.getFile("~/test.txt");
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     /**
@@ -36,7 +46,8 @@ public class ResourceUtilTest {
      */
     @Test
     public void testRead() throws Exception {
-        //TODO: Test goes here...
+        String s = ResourceUtil.read(path);
+        assert content.equals(content);
     }
 
     /**
@@ -44,7 +55,8 @@ public class ResourceUtilTest {
      */
     @Test
     public void testReadResource() throws Exception {
-        //TODO: Test goes here...
+        String s = ResourceUtil.readResource(path);
+        assert content.equals(content);
     }
 
     /**
@@ -52,7 +64,8 @@ public class ResourceUtilTest {
      */
     @Test
     public void testGetFile() throws Exception {
-        //TODO: Test goes here...
+        File file = ResourceUtil.getFile("~/test.txt");
+        assert file.exists();
     }
 
     /**

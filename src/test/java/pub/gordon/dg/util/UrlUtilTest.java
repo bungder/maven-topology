@@ -26,7 +26,8 @@ public class UrlUtilTest {
      */
     @Test
     public void testConcatForNode1Node2() throws Exception {
-        //TODO: Test goes here...
+        String s = UrlUtil.concat("path1", "path2");
+        System.out.println(s);
     }
 
     /**
@@ -34,7 +35,9 @@ public class UrlUtilTest {
      */
     @Test
     public void testConcatForNode1Node2Nodes() throws Exception {
-        //TODO: Test goes here...
+        String[] ss = {"node1", "node2", "node3", "node4"};
+        String s = UrlUtil.concat("node", "node0", ss);
+        System.out.println(s);
     }
 
 

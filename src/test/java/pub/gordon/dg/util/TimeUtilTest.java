@@ -26,7 +26,7 @@ public class TimeUtilTest {
      */
     @Test
     public void testNormalizeTime() throws Exception {
-        //TODO: Test goes here...
+        System.out.println(TimeUtil.normalizeTime(1000*60*24 + 100));
     }
 
 
