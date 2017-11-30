@@ -14,6 +14,7 @@ import pub.gordon.dg.suite.filter.Filter;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -37,7 +38,7 @@ public class POMResolver {
     }
 
     public void resolveProject(String projectName, DGSuit<MavenNode> suit) throws IOException, XmlPullParserException,
-            POMNotFoundException, GitAPIException, InterruptedException {
+            POMNotFoundException, GitAPIException, InterruptedException, URISyntaxException {
         List<String> pomList = pathResolver.resolve(projectName);
         if (CollectionUtils.isEmpty(pomList)) {
             throw new POMNotFoundException(projectName);

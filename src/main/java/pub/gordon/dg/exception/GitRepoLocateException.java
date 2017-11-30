@@ -4,7 +4,7 @@ package pub.gordon.dg.exception;
  * @author Gordon
  * @date 2017-11-17 09:42
  */
-public class GitRepoLocateException extends Exception {
+public class GitRepoLocateException extends SilentException {
     public GitRepoLocateException() {
     }
 

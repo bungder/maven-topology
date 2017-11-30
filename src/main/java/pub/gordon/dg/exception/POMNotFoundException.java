@@ -4,7 +4,7 @@ package pub.gordon.dg.exception;
  * @author Gordon
  * @date 2017-11-16 23:20
  */
-public class POMNotFoundException extends Exception{
+public class POMNotFoundException extends SilentException{
     public POMNotFoundException() {
     }
 

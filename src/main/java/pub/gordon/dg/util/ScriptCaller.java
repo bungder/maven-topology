@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import pub.gordon.dg.exception.UnknownCommandException;
 
 import java.io.*;
+import java.util.Properties;
 
 /**
  * @author Gordon
@@ -45,9 +46,14 @@ public class ScriptCaller {
 
     public static void exeCommand(String workDir, String command) throws InterruptedException, IOException {
         StringBuilder sb = new StringBuilder();
-        sb.append("cd ").append(workDir).append("\n").append(command).append("\n");
-        Process child = Runtime.getRuntime().exec(sb.toString());
+        sb.append("cd ").append(workDir).append("\n");
+        Process child = null;
+        Properties property = System.getProperties();
+        String originalDir = property.getProperty( "user.dir");
+        property.setProperty( "user.dir",workDir);
+        child = Runtime.getRuntime().exec(command);
         child.waitFor();
+        property.setProperty( "user.dir",originalDir);
     }
 
 

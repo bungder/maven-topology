@@ -28,7 +28,7 @@ Sometimes granularity of packaging is subdivided into module. It means maven nod
 
 This rule varies from people to people. So you may need to define your rule when using this util:
 
-Implement interface `pub.gordon.dg.maven.ModuleParentNameResolver`, then use full classname of that implementation class to cover content of file `src/main/resources/META-INF/service/pub.gordon.dg.maven.ModuleParentNameResolver`.
+Implement interface `pub.gordon.dg.maven.ModuleParentNameResolver`, then use full classname of that implementation class to cover content of file `src/main/resources/META-INF/services/pub.gordon.dg.maven.ModuleParentNameResolver`.
 
 ### 3.2 Parameters or Configuration File
 
@@ -82,7 +82,7 @@ See [src/main/resources/usage.txt](src/main/resources/usage.txt)
 这种规则因人而异，因此需要具体的使用者去定义。
 
 实现`pub.gordon.dg.maven.ModuleParentNameResolver`接口，然后将实现类的路径覆盖到
-`src/main/resources/META-INF/service/pub.gordon.dg.maven.ModuleParentNameResolver`文件中即可。
+`src/main/resources/META-INF/services/pub.gordon.dg.maven.ModuleParentNameResolver`文件中即可。
 
 ### 3.2 参数 or 配置文件
 

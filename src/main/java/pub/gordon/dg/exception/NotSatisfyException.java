@@ -4,7 +4,7 @@ package pub.gordon.dg.exception;
  * @author Gordon
  * @date 2017-11-03 10:37
  */
-public class NotSatisfyException extends Exception {
+public class NotSatisfyException extends SilentException {
     public NotSatisfyException() {
     }
 

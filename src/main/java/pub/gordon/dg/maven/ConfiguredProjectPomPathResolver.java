@@ -1,6 +1,7 @@
 package pub.gordon.dg.maven;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.gitlab.api.models.GitlabProject;
 import org.slf4j.Logger;
@@ -8,13 +9,16 @@ import org.slf4j.LoggerFactory;
 import pub.gordon.dg.bean.RepositoryConfig;
 import pub.gordon.dg.exception.GitRepoLocateException;
 import pub.gordon.dg.exception.POMNotFoundException;
+import pub.gordon.dg.exception.SilentException;
 import pub.gordon.dg.git.TagHelper;
 import pub.gordon.dg.gitlab.RepoInfoCache;
 import pub.gordon.dg.util.GitUtil;
+import pub.gordon.dg.util.ResourceUtil;
 import pub.gordon.dg.util.UrlUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.*;
 
@@ -32,22 +36,49 @@ public class ConfiguredProjectPomPathResolver extends ProjectPomLocalPathResolve
 
     {
         ServiceLoader<ModuleParentNameResolver> serviceLoader = ServiceLoader.load(ModuleParentNameResolver.class);
-        Iterator<ModuleParentNameResolver> iterator =  serviceLoader.iterator();
-        if(iterator.hasNext()){
+        Iterator<ModuleParentNameResolver> iterator = serviceLoader.iterator();
+        if (iterator.hasNext()) {
             moduleParentNameResolver = iterator.next();
-        }else{
+        } else {
             logger.error("Failed to load " + ModuleParentNameResolver.class.getName() + " instance");
             System.exit(1);
         }
     }
 
-    public List<String> resolve(String projectName) throws POMNotFoundException, IOException, GitAPIException, InterruptedException {
+    public List<String> resolve(String projectName) throws POMNotFoundException, IOException, GitAPIException, InterruptedException, URISyntaxException {
         String path = UrlUtil.concat(config.getDir(), projectName);
-        File file = new File(path);
-        if (file.getParentFile() == null || !file.getParentFile().exists()) {
-            new File(file.getParent()).mkdirs();
+        File file = ResourceUtil.getFile(path, true);
+        Git git;
+        try {
+            git = Git.open(file);
+        } catch (Throwable e0) {
+            if(file.listFiles() != null){
+                for(File f : file.listFiles()){
+                    f.delete();
+                }
+            }
+            try {
+                GitlabProject project = RepoInfoCache.getProjectByName(projectName);
+                if (project == null) {
+                    project = tryParent(projectName);
+                    if (project == null) {
+                        throw new GitRepoLocateException(MessageFormat.format("Could not find repository for {0}", projectName));
+                    }
+                }
+                GitUtil.cloneRepo(project.getHttpUrl(), file);
+                git = Git.open(file);
+            } catch (Throwable e) {
+                e.printStackTrace();
+                String message;
+                if(e instanceof SilentException){
+                    message = e.getMessage();
+                }else {
+                    message = MessageFormat.format("Directory {0} does not exists.", path);
+                }
+                throw new POMNotFoundException(message);
+            }
         }
-        if (!file.exists()) {
+        /*if (!file.exists()) {
             try {
                 GitlabProject project = RepoInfoCache.getProjectByName(projectName);
                 if (project == null) {
@@ -61,9 +92,9 @@ public class ConfiguredProjectPomPathResolver extends ProjectPomLocalPathResolve
                 e.printStackTrace();
                 throw new POMNotFoundException(MessageFormat.format("Directory {0} does not exists.", path));
             }
-        }
+        }*/
         if (!file.isDirectory()) throw new POMNotFoundException(MessageFormat.format("{0} is not a directory", path));
-        tagHelper.checkoutToNewestTag(file);
+        tagHelper.checkoutToNewestTag(git);
         int deep = 0;
         List<File>[] fileQueueList = new List[DEEP];
         for (int i = 0; i < DEEP; i++) {

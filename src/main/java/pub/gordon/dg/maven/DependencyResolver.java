@@ -12,6 +12,7 @@ import pub.gordon.dg.maven.bean.MavenNode;
 import pub.gordon.dg.suite.DGSuit;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,15 +27,18 @@ public class DependencyResolver {
     private static final Logger logger = LoggerFactory.getLogger(DependencyResolver.class);
 
     public static List<MavenNode> sortEffected(List<String> projectNames, DGSuit<MavenNode> suit)
-            throws IOException, XmlPullParserException, POMNotFoundException, GitAPIException, InterruptedException {
+            throws IOException, XmlPullParserException, POMNotFoundException, GitAPIException, InterruptedException, URISyntaxException {
         logger.info("Start resolving...");
         POMResolver resolver = new POMResolver(new ConfiguredProjectPomPathResolver());
         if (CollectionUtils.isEmpty(projectNames)) {
             return Collections.EMPTY_LIST;
         }
         Set<Dependency<MavenNode>> relationSet = new HashSet<>(100);
+        int size = projectNames.size();
+        int i = 0;
         for (String projectName : projectNames) {
-            logger.info("Resolving {}", projectName);
+            i++;
+            logger.info("Resolving {}/{} {}", i, size, projectName);
             resolver.resolveProject(projectName, suit);
         }
         if (!CollectionUtils.isEmpty(resolver.getRelations())) {

@@ -4,7 +4,7 @@ package pub.gordon.dg.exception;
  * @author Gordon
  * @date 2017-11-03 11:43
  */
-public class UnknownCommandException extends Exception {
+public class UnknownCommandException extends SilentException {
     public UnknownCommandException() {
     }
 

@@ -1,6 +1,7 @@
 package pub.gordon.dg.util;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,23 +43,33 @@ public class ResourceUtil {
         return sb.toString();
     }
 
-    public static File getFile(String path) throws URISyntaxException, FileNotFoundException {
+    public static File getFile(String path, boolean createOnMissing) throws URISyntaxException, FileNotFoundException {
+        if (StringUtils.isBlank(path)) throw new FileNotFoundException("path is empty");
+        if (path.startsWith("~")) {
+            path = UrlUtil.concat(System.getProperty("user.home"), path.substring(1));
+        }
         File f = new File(path);
         if (f.exists()) return f;
         if (!path.startsWith("/") && !path.startsWith("~")) {
             f = new File(UrlUtil.concat(System.getProperty("user.dir"), path));
             if (f.exists()) return f;
-        } else if (path.startsWith("~")) {
-            path = UrlUtil.concat(System.getProperty("user.home"), path.substring(1));
-            f = new File(path);
-            if(f.exists()) return f;
         }
-        URL url = loader.getResource(path);
-        if (url == null) throw new FileNotFoundException(path);
-        URI uri = new URI(url.toString());
-        f = new File(uri.getPath());
-        if (f.exists()) return f;
-        throw new FileNotFoundException(path);
+        try {
+            URL url = loader.getResource(path);
+            if (url == null) throw new FileNotFoundException(path);
+            URI uri = new URI(url.toString());
+            f = new File(uri.getPath());
+            if (f.exists()) return f;
+            throw new FileNotFoundException(path);
+        } catch (FileNotFoundException e) {
+            if (!createOnMissing) throw e;
+            f.mkdirs();
+            return f;
+        }
+    }
+
+    public static File getFile(String path) throws FileNotFoundException, URISyntaxException {
+        return getFile(path, false);
     }
 
     public static void write(String content, String path, boolean echo) throws IOException {

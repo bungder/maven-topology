@@ -4,6 +4,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import pub.gordon.dg.exception.POMNotFoundException;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -12,5 +13,5 @@ import java.util.List;
  */
 public abstract class ProjectPomLocalPathResolver {
 
-    public abstract List<String> resolve(String projectName) throws POMNotFoundException, IOException, GitAPIException, InterruptedException;
+    public abstract List<String> resolve(String projectName) throws POMNotFoundException, IOException, GitAPIException, InterruptedException, URISyntaxException;
 }

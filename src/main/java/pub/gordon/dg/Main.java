@@ -8,9 +8,7 @@ import pub.gordon.dg.maven.DependencyResolver;
 import pub.gordon.dg.maven.bean.MavenNode;
 import pub.gordon.dg.maven.suite.filter.GAMavelFilter;
 import pub.gordon.dg.suite.DGSuit;
-import pub.gordon.dg.util.ParamUtil;
-import pub.gordon.dg.util.ResourceUtil;
-import pub.gordon.dg.util.StartupParam;
+import pub.gordon.dg.util.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +38,7 @@ public class Main {
 
         if (!StringUtils.isBlank(StartupParam.get(P_HELP))) {
             try {
-                System.out.println("\n\n" + ResourceUtil.readResource("usage.txt"));
+                printLog();
             } catch (Throwable e) {
                 e.printStackTrace();
             } finally {
@@ -49,10 +47,12 @@ public class Main {
         }
         if (StringUtils.isBlank(StartupParam.get(P_INPUT_FILE))) {
             logger.error("{} is required. Use {} to get help.", P_INPUT_FILE, P_HELP);
+            printLog();
             return;
         }
         if (StringUtils.isBlank(StartupParam.get(P_OUTPUT_FILE))) {
             logger.error("{} is required. Use {} to get help.", P_OUTPUT_FILE, P_HELP);
+            printLog();
             return;
         }
         try {
@@ -64,7 +64,7 @@ public class Main {
             RepositoryConfig.Rule rule = RepositoryConfig.getInstance().getRule();
             DGSuit<MavenNode> suit = new DGSuit<>(Arrays.asList(new GAMavelFilter(rule.getGroupIdPattern(), rule.getArtifactIdPattern())));
             List<MavenNode> nodes = DependencyResolver.sortEffected(
-                    Arrays.asList(content.split("\n")).stream().map(String::trim).collect(Collectors.toList()),
+                    Arrays.asList(content.split("\n")).stream().map(String::trim).filter(s -> !StringUtils.isBlank(s)).collect(Collectors.toList()),
                     suit);
             StringBuilder sb = new StringBuilder();
             for (MavenNode n : nodes) {
@@ -72,8 +72,12 @@ public class Main {
             }
             ResourceUtil.write(sb.toString(), StartupParam.get(P_OUTPUT_FILE), true);
         } catch (Throwable e) {
-            e.printStackTrace();
+            ExceptionProcessor.processAndExit(e, logger);
         }
+    }
+
+    private static void printLog() {
+        logger.info("\n\n"+Usage.get());
     }
 
 }

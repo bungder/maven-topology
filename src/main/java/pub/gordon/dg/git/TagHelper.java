@@ -54,14 +54,15 @@ public class TagHelper {
      * 2. sort those tags in the order of {@code tagOrder}
      * 3. the first tag is regard as the newest tag
      *
-     * @param repoDir repository's root directory
+     * @param git Git instance
      * @throws IOException
      * @throws GitAPIException
      * @throws InterruptedException
      */
-    public void checkoutToNewestTag(File repoDir) throws IOException, GitAPIException, InterruptedException {
-        logger.info("checkout {} to newest tag", repoDir.getAbsoluteFile());
-        Git git = Git.open(repoDir);
+    public void checkoutToNewestTag(Git git) throws IOException, GitAPIException, InterruptedException {
+        File repoDir = git.getRepository().getDirectory().getParentFile();
+        logger.info("Checkout {} to newest tag", repoDir.getName());
+
         List<Ref> tags = git.tagList().call();
         if (!CollectionUtils.isEmpty(tags)) {
             deleteTagsByCommand(repoDir);
