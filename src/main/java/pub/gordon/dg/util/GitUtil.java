@@ -21,6 +21,9 @@ public class GitUtil {
 
     public static void cloneRepo(String repoUrl, File path) throws GitAPIException, IOException {
         logger.info("Cloning {} to {}", repoUrl, path.getAbsoluteFile());
+        if(!path.exists()){
+            path.mkdirs();
+        }
         Git.cloneRepository()
                 .setCloneSubmodules(true)
                 .setURI(repoUrl)

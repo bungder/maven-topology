@@ -1,6 +1,8 @@
 package pub.gordon.dg.bean;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pub.gordon.dg.util.*;
 
 import java.io.IOException;
@@ -16,6 +18,7 @@ import static pub.gordon.dg.util.StartupParam.*;
  */
 public class RepositoryConfig implements Serializable {
     private static final long serialVersionUID = -6275184640159327579L;
+    private static final Logger logger = LoggerFactory.getLogger(RepositoryConfig.class);
 
     public static class GitlabConfig implements Serializable {
         private static final long serialVersionUID = -8439051906568762668L;
@@ -84,7 +87,7 @@ public class RepositoryConfig implements Serializable {
                 instance = load(StartupParam.get(P_REPO_CONFIG_FILE));
             } catch (Throwable e) {
                 try {
-                    instance = load("default_repo.json");
+                    instance = load("config.json");
                 } catch (Throwable e2) {
                     e.printStackTrace();
                     e2.printStackTrace();
@@ -124,7 +127,7 @@ public class RepositoryConfig implements Serializable {
                 .stringNotBlank(instance.gitlab.username, "Gitlab username is required")
                 .stringNotBlank(instance.gitlab.password, "Password of gitlab user is required").getMsg();
         if (err.isErrorOccur()) {
-            System.err.println(MessageFormat.format("Loading config failed: \n{0}", err.getErrMsgWithoutSeparatorTail()));
+            logger.error(MessageFormat.format("Loading config failed: \n{0}", err.getErrMsgWithoutSeparatorTail()));
             System.exit(2);
         }
     }

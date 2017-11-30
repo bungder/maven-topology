@@ -1,0 +1,14 @@
+{
+  "dir": "/home/gordon/Documents/repo/all/",
+  "rule": {
+    "tagPattern": "dev$",
+    "groupIdPattern": "^pub.gordon",
+    "artifactIdPattern": "",
+    "tagOrder": "DESC"
+  },
+  "gitlab": {
+    "url": "http://gitlab.hd",
+    "username": "tanshichang",
+    "password": "1123581321htMM"
+  }
+}
