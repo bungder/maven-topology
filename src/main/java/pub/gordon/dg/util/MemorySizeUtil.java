@@ -7,23 +7,38 @@ package pub.gordon.dg.util;
 public class MemorySizeUtil {
 
 
-    public static String transformByteSize(int size){
-        int mb = 0, kb = 0, b = 0;
-        kb = size / 1024;
-        mb = kb / 1024;
-        kb = kb%1024;
+    public static String transformByteSize(long size) {
+        StringBuilder sb = new StringBuilder();
+        long pb = 0, tb = 0, gb = 0, mb = 0, kb = 0, b = 0;
+        kb = size >> 10;
+        mb = kb >> 10;
+        gb = mb >> 10;
+        tb = gb >> 10;
+        pb = tb >> 10;
+        tb = tb % 1024;
+        gb = gb % 1024;
+        mb = mb % 1024;
+        kb = kb % 1024;
         b = size % 1024;
-        String result = "";
-        if(mb > 0){
-            result += mb + "MB ";
+        if (pb > 0) {
+            sb.append(pb).append("PB ");
         }
-        if(kb > 0){
-            result += kb + "KB ";
+        if (tb > 0) {
+            sb.append(tb).append("TB ");
         }
-        if(b > 0){
-            result += b + "B";
+        if (gb > 0) {
+            sb.append(gb).append("GB ");
         }
-        return result;
+        if (mb > 0) {
+            sb.append(mb).append("MB ");
+        }
+        if (kb > 0) {
+            sb.append(kb).append("KB ");
+        }
+        if (b > 0) {
+            sb.append(b).append("B ");
+        }
+        return sb.toString().trim();
     }
 
 }

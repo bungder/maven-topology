@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.MessageFormat;
+
 /**
  * MemorySizeUtil Tester.
  *
@@ -26,7 +28,8 @@ public class MemorySizeUtilTest {
      */
     @Test
     public void testTransformByteSize() throws Exception {
-        //TODO: Test goes here...
+        long size = 1000L*1000*1000*1024*1024*5+10;
+        System.out.println(MessageFormat.format("{0} transform to {1}", ""+size, MemorySizeUtil.transformByteSize(size)));
     }
 
 
