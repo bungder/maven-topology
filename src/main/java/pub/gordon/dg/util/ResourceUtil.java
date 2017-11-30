@@ -31,7 +31,6 @@ public class ResourceUtil {
     }
 
     public static String readResource(String path) throws IOException {
-//        URL url = ResourceUtil.class.getClassLoader().getResource(path);
         InputStream input = ResourceUtil.class.getClassLoader().getResourceAsStream(path);
         StringBuilder sb = new StringBuilder();
         int len;
@@ -49,9 +48,13 @@ public class ResourceUtil {
         if (!path.startsWith("/") && !path.startsWith("~")) {
             f = new File(UrlUtil.concat(System.getProperty("user.dir"), path));
             if (f.exists()) return f;
+        } else if (path.startsWith("~")) {
+            path = UrlUtil.concat(System.getProperty("user.home"), path.substring(1));
+            f = new File(path);
+            if(f.exists()) return f;
         }
         URL url = loader.getResource(path);
-        if(url == null) throw new FileNotFoundException(path);
+        if (url == null) throw new FileNotFoundException(path);
         URI uri = new URI(url.toString());
         f = new File(uri.getPath());
         if (f.exists()) return f;

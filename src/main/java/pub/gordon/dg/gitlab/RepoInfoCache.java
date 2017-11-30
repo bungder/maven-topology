@@ -49,11 +49,11 @@ public class RepoInfoCache {
                 boolean conflicted = true;
                 GitlabProject p0 = projectMap.get(p.getName());
                 for (String group : groupPriority) {
-                    if (group.equalsIgnoreCase(tirmHttpUrlGroupName(p.getHttpUrl()))) {
+                    if (group.equalsIgnoreCase(trimHttpUrlGroupName(p.getHttpUrl()))) {
                         projectMap.put(p.getName(), p);
                         conflicted = false;
                         break;
-                    } else if (group.equalsIgnoreCase(tirmHttpUrlGroupName(p0.getHttpUrl()))) {
+                    } else if (group.equalsIgnoreCase(trimHttpUrlGroupName(p0.getHttpUrl()))) {
                         conflicted = false;
                         break;
                     }
@@ -76,7 +76,7 @@ public class RepoInfoCache {
         return projectMap.get(projectName);
     }
 
-    private static String tirmHttpUrlGroupName(String httpUrl) throws GitRepoLocateException {
+    private static String trimHttpUrlGroupName(String httpUrl) throws GitRepoLocateException {
         char[] cs = httpUrl.toCharArray();
         int start = 0, end = 0;
         for (int i = cs.length - 1; i > 0; i--) {

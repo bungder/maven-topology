@@ -6,6 +6,7 @@ import org.gitlab.api.GitlabAPI;
 import org.gitlab.api.models.GitlabGroup;
 import org.gitlab.api.models.GitlabProject;
 import org.gitlab.api.models.GitlabSession;
+import org.junit.Ignore;
 import org.junit.Test;
 import pub.gordon.dg.bean.RepositoryConfig;
 import pub.gordon.dg.util.GitUtil;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 public class GitlabTest {
 
+    @Ignore
     @Test
     public void testConnect() throws IOException {
         String host = "http://gitlab.hd";

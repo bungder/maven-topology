@@ -4,13 +4,14 @@
 	<property name="log.charset" value="UTF-8" />
 	<property name="log.maxHistory" value="60" />
 	<property name="log.pattern" value="[%-5level] %date -- %thread -- [%logger]:%L -- %msg %n" />
+	<property name="log.console.pattern" value="%cyan(%d{HH:mm:ss.SSS} --) %highlight(%msg %n)" />
 	<property name="log.async.queue.size" value="1024" />
 
 	<contextName>${log.context.name}</contextName>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder charset="${log.charset}">
-			<pattern>${log.pattern}</pattern>
+			<pattern>${log.console.pattern}</pattern>
 		</encoder>
 	</appender>
 	<appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">

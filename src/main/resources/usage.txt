@@ -34,7 +34,9 @@ java -jar maven-topology-1.0-SNAPSHOT.jar [参数]...[参数]
     }
 
 -Di
-    指定输入文件，文件为文本文件，每行指定一个工程名
+    指定输入文件，文件为文本文件，每行指定一个工程名。文件的内容举例如下：
+    spring-core
+    spring-web
 -Do
     指定输出文件
 -Drule.tag.pattern
