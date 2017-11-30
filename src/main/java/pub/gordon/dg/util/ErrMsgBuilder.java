@@ -66,6 +66,7 @@ public class ErrMsgBuilder {
             return msgBuilder.toString();
         }
         String str = msgBuilder.toString().trim();
+        separator = separator.trim();
         if (str.endsWith(separator)) {
             str = str.substring(0, str.length() - separator.length());
         }

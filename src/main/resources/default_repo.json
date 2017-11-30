@@ -1,5 +1,5 @@
 {
-  "dir": "/Users/tanshichang/Documents/repo/test/gordon",
+  "dir": "~/Documents/repo/test/gordon",
   "rule": {
     "tagPattern": "dev$",
     "groupIdPattern": "^pub.gordon",
