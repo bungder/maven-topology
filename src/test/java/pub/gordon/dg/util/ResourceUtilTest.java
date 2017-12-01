@@ -47,7 +47,7 @@ public class ResourceUtilTest {
     @Test
     public void testRead() throws Exception {
         String s = ResourceUtil.read(path);
-        assert content.equals(content);
+        assert content.equals(s);
     }
 
     /**
@@ -56,7 +56,7 @@ public class ResourceUtilTest {
     @Test
     public void testReadResource() throws Exception {
         String s = ResourceUtil.readResource(path);
-        assert content.equals(content);
+        assert content.equals(s);
     }
 
     /**

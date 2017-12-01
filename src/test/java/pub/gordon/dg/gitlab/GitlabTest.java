@@ -1,6 +1,5 @@
 package pub.gordon.dg.gitlab;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.gitlab.api.GitlabAPI;
 import org.gitlab.api.models.GitlabGroup;
@@ -41,6 +40,7 @@ public class GitlabTest {
         }
     }
 
+    @Ignore
     @Test
     public void cloneAll() throws IOException {
         RepositoryConfig config = RepositoryConfig.getInstance();
@@ -69,6 +69,7 @@ public class GitlabTest {
         }
     }
 
+    @Ignore
     @Test
     public void testMkdir() {
         RepositoryConfig config = RepositoryConfig.getInstance();

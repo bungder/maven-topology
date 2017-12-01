@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * RegUtil Tester.
  *
@@ -26,7 +29,7 @@ public class RegUtilTest {
      */
     @Test
     public void testMatchForContentRegexp() throws Exception {
-        //TODO: Test goes here...
+        assert RegUtil.match("123", "123");
     }
 
     /**
@@ -34,7 +37,7 @@ public class RegUtilTest {
      */
     @Test
     public void testMatchForStreamRegexp() throws Exception {
-        //TODO: Test goes here...
+        assert RegUtil.match(Stream.of("123", "123123", "333"), "123").collect(Collectors.toList()).size() == 2;
     }
 
     /**
