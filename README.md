@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/bungder/maven-topology.svg?branch=master)](https://travis-ci.org/bungder/maven-topology)
 [![codecov](https://codecov.io/gh/bungder/maven-topology/branch/master/graph/badge.svg)](https://codecov.io/gh/bungder/maven-topology)
 [![Dependency Status](https://www.versioneye.com/user/projects/5a2788c40fb24f6aa446f7f9/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a2788c40fb24f6aa446f7f9)
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=plastic)](https://github.com/bungder/maven-topology/blob/master/LICENSE)
 
 # Topological Sorting Tools For Maven Nodes
 
