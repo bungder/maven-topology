@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/bungder/maven-topology.svg?branch=master)](https://travis-ci.org/bungder/maven-topology)
 [![codecov](https://codecov.io/gh/bungder/maven-topology/branch/master/graph/badge.svg)](https://codecov.io/gh/bungder/maven-topology)
+[![Dependency Status](https://www.versioneye.com/user/projects/5a2788c40fb24f6aa446f7f9/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a2788c40fb24f6aa446f7f9)
 
 # Topological Sorting Tools For Maven Nodes
 
@@ -39,7 +40,7 @@ See [src/main/resources/usage.txt](src/main/resources/usage.txt)
 (Package as a runnable jar)
 
 ```bash
-mvn assembly:assembly -Dmaven.test.skip=true
+mvn clean package -Dmaven.test.skip=true
 ```
 
 ### 3.4 Run
@@ -93,7 +94,7 @@ See [src/main/resources/usage.txt](src/main/resources/usage.txt)
 （打包成可运行的jar包）
 
 ```bash
-mvn assembly:assembly -Dmaven.test.skip=true
+mvn clean package -Dmaven.test.skip=true
 ```
 
 ### 3.4 运行

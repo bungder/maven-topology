@@ -1,6 +1,6 @@
 用法：
 
-java -jar maven-topology-1.0-SNAPSHOT.jar [参数]...[参数]
+java -jar maven-topology.jar [参数]...[参数]
 
 参数解释：
 
@@ -19,7 +19,7 @@ java -jar maven-topology-1.0-SNAPSHOT.jar [参数]...[参数]
 -Dc
     指定配置文件的路径，如果使用了此参数，则上面的参数都无效，如果不指定此参数，则上面四个参数都必须指定值，配置文件的格式如下：
     {
-      "dir": "/Users/tanshichang/Documents/repo/test/gordon",
+      "dir": "~/Documents/repo/test/gordon",
       "rule": {
         "tagPattern": "dev$",
         "groupIdPattern": "^pub.gordon",
@@ -53,7 +53,7 @@ java -jar maven-topology-1.0-SNAPSHOT.jar [参数]...[参数]
 
 示例：
 
-java -jar maven-topology-1.0-SNAPSHOT.jar -Drepo.dir=~/Documents/repo -Dgitlab.url=http://gitlab.gordon.local -Dgitlab.username=tom -Dgitlab.password=123123 -Di=sample.txt -Do=out.txt -Drule.tag.pattern=dev$ -Drule.groupId.pattern=^pub.gordon
+java -jar maven-topology.jar -Drepo.dir=~/Documents/repo -Dgitlab.url=http://gitlab.gordon.local -Dgitlab.username=tom -Dgitlab.password=123123 -Di=sample.txt -Do=out.txt -Drule.tag.pattern=dev$ -Drule.groupId.pattern=^pub.gordon
 
 
 If you see chaos characters, try adding -Dfile.encoding=UTF-8 when invoking.
